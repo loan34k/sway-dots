@@ -203,24 +203,6 @@ input type:keyboard {
 
 bindsym $mod+space exec swaymsg input "type:keyboard" xkb_switch_layout next && notify-send -u low -h string:x-canonical-private-synchronous:layout -t 1000 "Clavier" "$(swaymsg -t get_inputs | jq -r '.[] | select(.type=="keyboard") | .xkb_active_layout_name' | head -n 1)"
 
- 
-#######
-## OUTPUTS
-#######
-
-# Samsung Screen (Top)
-output HDMI-A-1 {
-    mode 1920x1080@60Hz
-    scale 1
-    position 0,0
-}
-
-# Laptop Screen (Bottom)
-output eDP-1 {
-    mode 1920x1200@60Hz
-    scale 1.25
-    position 192,1080
-}
 
 ################
 ## EXEC ON START
