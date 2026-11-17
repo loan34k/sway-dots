@@ -12,7 +12,7 @@ set $up k
 set $right l
  
 # Application preferences
-set $term /home/loan/.config/sway/cascade_term.sh
+set $term alacritty
 set $filemanager pcmanfm
 set $menu rofi -show drun
  
