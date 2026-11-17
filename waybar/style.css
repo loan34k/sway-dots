@@ -1,0 +1,56 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Rubik", "JetBrains Mono", sans-serif;
+    font-size: 12px;
+    min-height: 0;
+}
+
+/* Barre globale : fond noir à 25% d'opacité pour profiter du flou */
+window#waybar {
+    background-color: rgba(15, 15, 15, 0.1);
+    color: #a8a8a8;
+}
+
+/* Style des modules */
+#workspaces,
+#window,
+#battery,
+#bluetooth,
+#pulseaudio,
+#custom-playerctl,
+#clock,
+#tray,
+#custom-hideall {
+    padding: 0 8px;
+    background-color: transparent;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 4px;
+    color: #666666;
+    background-color: transparent;
+}
+
+#workspaces button.focused {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: #ff5555;
+}
+
+/* Spécificités texte */
+#window {
+    color: #ffffff;
+}
+
+#custom-playerctl {
+    color: #ffffff;
+}
+
+#clock, #battery, #pulseaudio, #bluetooth {
+    color: #888888;
+}

@@ -1,0 +1,68 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 8,
+  "modules-left": ["sway/workspaces", "sway/window"],
+  "modules-center": [],
+  "modules-right": ["battery", "bluetooth", "pulseaudio", "custom/playerctl", "clock", "tray", "custom/hideall"],
+  
+  "tray": {
+    "spacing": 6,
+    "icon-size": 16
+  },
+  "custom/hideall": {
+    "format": "🗕",
+    "on-click": "~/.config/waybar/sway-toggle-hide.sh",
+    "tooltip": false
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%H:%M}",
+    "tooltip": false
+  },
+  "battery": {
+    "format": "{capacity}%",
+    "format-low": "{capacity}%",
+    "low-threshold": 20,
+    "poll-interval": 10,
+    "tooltip": false
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "tooltip": false,
+    "on-click": "blueman-manager"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "default": ["", ""]
+    },
+    "on-click": "pavucontrol",
+    "tooltip": false
+  },
+  "custom/playerctl": {
+    "exec": "~/.config/waybar/playerctl.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+  "sway/workspaces": {
+    "all-outputs": false,
+    "format": "{name}",
+    "tooltip": false
+  },
+  "sway/window": {
+    "max-title-length": 25,
+    "format": "{title}",
+    "tooltip": false
+  }
+}
