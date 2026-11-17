@@ -1,0 +1,242 @@
+############
+## VARIABLES
+############
+ 
+# Modifier key (Touche Windows/Super)
+set $mod Mod4
+ 
+# Movement keys
+set $left h
+set $down j
+set $up k
+set $right l
+ 
+# Application preferences
+set $term /home/loan/.config/sway/cascade_term.sh
+set $filemanager pcmanfm
+set $menu rofi -show drun
+ 
+#############
+## APPEARANCE
+#############
+ 
+# Wallpaper
+# output eDP-1 bg ~/wallpaper.png fill
+
+default_border pixel 1
+default_floating_border none
+smart_borders on
+
+titlebar_border_thickness 0
+titlebar_padding 5 5
+
+client.focused #ffffff33 #28282833 #ffffff #ffffff #ffffff33
+client.focused_inactive #28282822 #28282822 #ffffff #ffffff #28282822
+client.unfocused #28282800 #28282800 #888888 #ffffff #28282800
+ 
+# Focus colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #282828 #282828 #ffffff #ffffff   #DDDDDD
+client.focused_inactive #282828 #282828 #ffffff #ffffff   #282828
+client.unfocused        #282828 #282828 #888888 #ffffff   #282828
+ 
+# Gaps
+gaps inner 8
+gaps outer 8
+ 
+# Hide cursor after 10s of inactivity
+seat seat0 hide_cursor 10000
+ 
+##############
+## KEYBINDINGS
+##############
+ 
+# Terminal
+bindsym $mod+q exec $term
+
+# File Manager (PCManFM-Qt)
+bindsym $mod+Shift+e exec $filemanager
+ 
+# Emacs
+bindsym $mod+Shift+Return exec emacs
+ 
+# Kill focused window
+bindsym $mod+Shift+q kill
+ 
+# Program launcher
+bindsym $mod+return exec $menu 
+
+# Drag floating windows with the mouse
+floating_modifier $mod normal
+ 
+# Reload Sway config
+bindsym $mod+Shift+c reload
+ 
+# Power menu
+bindsym Ctrl+Alt+Delete exec swaynag -t warning \
+   -m 'Que veux-tu faire ?' \
+   -b 'Éteindre' 'shutdown now' \
+   -b 'Quitter Sway' 'swaymsg exit'
+ 
+# Change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+ 
+# Move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+ 
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+ 
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+ 
+# Split layout
+bindsym $mod+b splith
+bindsym $mod+v splitv
+ 
+# Container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+ 
+# Fullscreen
+bindsym $mod+f fullscreen
+ 
+# Toggle tiling / floating
+bindsym $mod+Shift+d floating toggle
+ 
+# Resize window
+bindsym $mod+Alt+h resize shrink width 10
+bindsym $mod+Alt+l resize grow width 10
+bindsym $mod+Alt+j resize shrink height 10
+bindsym $mod+Alt+k resize grow height 10
+ 
+# Switch focus between tiling / floating mode
+bindsym $mod+d focus mode_toggle
+
+# Switch active windows with Alt + Tab via Rofi
+bindsym Mod1+Tab exec rofi -show window
+ 
+# Screenshots
+bindsym $mod+Shift+p exec hyprshot -m output
+ 
+# Volume keys
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+# Media keys
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioStop exec playerctl stop
+ 
+# Brightness keys
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+ 
+# Lock screen
+bindsym XF86Sleep exec swaylock -f -C ~/.config/swaylock/config
+ 
+#######
+## IDLE
+#######
+ 
+exec swayidle -w timeout 1800 'swaylock -f -C ~/.config/swaylock/config' \
+          timeout 2000 'swaymsg "output * dpms off"' \
+          resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -C ~/.config/swaylock/config'
+ 
+#######
+## INPUTS
+#######
+
+input type:touchpad {
+  dwt enabled
+  tap enabled
+  natural_scroll enabled
+  middle_emulation enabled
+}
+
+input type:keyboard {
+  xkb_layout "us,fr"
+  xkb_variant "intl,"
+#  xkb_options "grp:win_space_toggle"
+}
+
+
+bindsym $mod+space exec swaymsg input "type:keyboard" xkb_switch_layout next && notify-send -u low -h string:x-canonical-private-synchronous:layout -t 1000 "Clavier" "$(swaymsg -t get_inputs | jq -r '.[] | select(.type=="keyboard") | .xkb_active_layout_name' | head -n 1)"
+
+ 
+#######
+## OUTPUTS
+#######
+
+# Samsung Screen (Top)
+output HDMI-A-1 {
+    mode 1920x1080@60Hz
+    scale 1
+    position 0,0
+}
+
+# Laptop Screen (Bottom)
+output eDP-1 {
+    mode 1920x1200@60Hz
+    scale 1.25
+    position 192,1080
+}
+
+################
+## EXEC ON START
+################
+ 
+exec mako
+exec waybar
+exec swaync
+exec nm-applet --indicator
+
+# (Suppression des blocs de flou/blur spécifiques à Sway-FX)
+
+# Minimiser
+bindsym $mod+m move scratchpad
+
+# Restaurer
+bindsym $mod+Shift+m scratchpad show
+
+exec_always --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
